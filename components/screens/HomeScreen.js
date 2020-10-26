@@ -31,18 +31,33 @@ class HomeScreen extends React.Component{
 
         const { navigation } = this.props;
 
+        const RenderImage = ({image}) => {
+            console.log('-----> ' + image)
+            if (image === undefined || image === null){
+                return(
+                    <Text>NO IMAGE FOUND</Text>
+                )
+            }
+            else
+                return(
+                    <Image
+                        style={styles.image}
+                        source={{
+                            uri: image,
+                        }}
+                    />
+                )
+        }
+
         const Art = ({ title, primaryimageurl, displayname, culture, objectnumber}) => (
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Details', {objectnumber: objectnumber})} underlayColor="white">
                 <View style={styles.item}>
                     <Text style={styles.title}>{title}</Text>
-                    <Image
-                        style={styles.image}
-                        source={{
-                            uri: primaryimageurl,
-                        }}
-                    />
+                    <View style={styles.imageContainer}>
+                        <RenderImage image={primaryimageurl}/>
+                    </View>
                     <Text style={styles.title}>{displayname}</Text>
-                    <Text style={styles.title}>{culture}</Text>
+                    <Text style={styles.title}>({culture})</Text>
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -52,7 +67,7 @@ class HomeScreen extends React.Component{
                 key={item.objectnumber}
                 title={item.title} 
                 primaryimageurl={item.primaryimageurl} 
-                displayname={item.role} 
+                displayname={item.artist} 
                 culture={item.culture} 
                 objectnumber={item.objectnumber}
             />
@@ -98,7 +113,14 @@ const styles = StyleSheet.create({
         margin: 5,
         height: 230
     },
+    imageContainer: {
+        marginTop: 10,
+        height: 100,
+        // backgroundColor: 'red',
+        justifyContent: 'center',
+    },
     image: {
+
         width: 90,
         height: 100,
     },
