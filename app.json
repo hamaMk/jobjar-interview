@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "The Harvard Art Museum records API integration with a react-native client. ",
+    "githubUrl": "https://github.com/hamaMk/jobjar-interview.git"
   }
 }
