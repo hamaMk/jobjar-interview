@@ -75,7 +75,7 @@ class DetailScreen extends React.Component{
                             Linking.openURL(record.url)
                         }}
                     >
-                    <Text style={styles.btn}>Click for more info</Text>
+                        <Text style={styles.btn}>Click for more info</Text>
                     </TouchableWithoutFeedback>
                 </View>
             </SafeAreaView>
