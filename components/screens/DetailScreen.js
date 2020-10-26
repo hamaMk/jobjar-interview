@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, SafeAreaView, View, FlatList, Button, Image} from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View, Linking, Button, Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
@@ -11,11 +11,11 @@ class DetailScreen extends React.Component{
         const { navigation, route } = this.props;
         const selectedRecord = route.params.objectnumber
         const record = this.props.records.find((e) => e.objectnumber === selectedRecord)
-        console.log(route.params)
-        console.log(record.primaryimageurl)
+        // console.log(route.params)
+        // console.log(record.primaryimageurl)
         // console.log(record.provenance)
 
-        const RenderImage = () =>{
+        const RenderImage = () => {
             if (record.primaryimageurl != null){
                 return (
                     <Image
@@ -42,7 +42,9 @@ class DetailScreen extends React.Component{
                 <Text>{record.provenance}</Text>
                 <Button
                 title="Click for more info"
-                onPress={() => navigation.push('Details')}
+                onPress={() => {
+                    Linking.openURL(record.url)
+                }}
                 />
             </SafeAreaView>
         );
