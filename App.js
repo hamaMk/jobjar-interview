@@ -1,55 +1,26 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, SafeAreaView, Button} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import axios from 'axios';
+import HomeScreen from './components/screens/HomeScreen'
+import DetailScreen from './components/screens/DetailScreen'
+import { Provider } from 'react-redux';
+import {createStore} from 'redux';
+import Reducer from './src/redux/reducer'
+
+const store = createStore(Reducer);
 
 const Stack = createStackNavigator();
 
-const HomeScreen = ({navigation}) => {
-  return(
-    <SafeAreaView style={styles.container}>
-      <Text>Home screen.</Text>
-      <StatusBar style="auto" />
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-    </SafeAreaView>
-  );
-}
-
-const DetailScreen = ({navigation}) => {
-  return(
-    <SafeAreaView style={styles.container}>
-      <Text>Details screen</Text>
-      <StatusBar style="auto" />
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
-    </SafeAreaView>
-  );
-}
-
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Details" component={DetailScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'silver',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
